@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.example.grpc";
+option java_outer_classname = "GreeterProto";
+
+package greeter;
+
+// Greeter 서비스 정의
+service Greeter {
+  // Unary RPC: 단일 요청 - 단일 응답
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+  
+  // Server Streaming RPC: 단일 요청 - 스트림 응답
+  rpc SayHelloStream (HelloRequest) returns (stream HelloReply) {}
+}
+
+// 요청 메시지
+message HelloRequest {
+  string name = 1;
+}
+
+// 응답 메시지
+message HelloReply {
+  string message = 1;
+}

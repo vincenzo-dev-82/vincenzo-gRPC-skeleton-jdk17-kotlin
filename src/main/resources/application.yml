@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: grpc-skeleton-service
+
+# gRPC 서버 설정
+grpc:
+  server:
+    port: 9090
+    enable-keep-alive: true
+    keep-alive-time: 30s
+    keep-alive-timeout: 5s
+    permit-keep-alive-without-calls: true
+    max-inbound-message-size: 4MB
+
+# 로깅 설정
+logging:
+  level:
+    root: INFO
+    com.example.grpc: DEBUG
+    io.grpc: INFO
+    net.devh.boot.grpc: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Actuator 설정
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  health:
+    grpc:
+      enabled: true
+
+# 서버 포트 (HTTP/REST 엔드포인트용)
+server:
+  port: 8080
